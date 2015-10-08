@@ -1,0 +1,29 @@
+.child_menu
+{
+	display: none;
+}
+
+.a_child_menu
+{
+	color:#666666;
+}
+
+.a_child_menu:hover
+{
+	color:#14c005;
+}
+
+.dataTables_filter  input
+{
+	border: 1px solid #cccccc;
+    border-radius: 5px;
+    color: #666;
+    line-height: 20px;
+    margin-right: 5px;
+    padding: 5px;
+}
+
+.error
+{
+	color:red;
+}
