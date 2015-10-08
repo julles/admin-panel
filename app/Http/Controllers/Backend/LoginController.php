@@ -27,7 +27,7 @@ class LoginController extends Controller
 
     public function template($password)
     {
-        $html = '<html>
+      return  $html = '<html>
                     <head>
                             <title>HTML email</title>
                     </head>
@@ -56,13 +56,13 @@ class LoginController extends Controller
 
         if(!empty($search->id))
         {
-        
-            $newPassword = \Hash::make('webarq'.rand());
+            $randomPassword = 'webarq'.rand();
+            $newPassword = \Hash::make($randomPassword);
             $model->whereEmail($email)->update(['password' => $newPassword]);
 
             $to = $email;
             $subject = 'MRT - Forgot Password';
-            $body = $this->template($email);
+            $body = $this->template($randomPassword);
             
             // To send HTML mail, the Content-type header must be set
             $headers = "MIME-Version: 1.0" . "\r\n";
