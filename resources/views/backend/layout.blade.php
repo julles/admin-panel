@@ -15,14 +15,11 @@
 <link type="text/css" href="{{ \Helper::assetUrl() }}backend/tab/style.css" rel="stylesheet" media="screen,projection"/>
 <link type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet" media="screen,projection"/>
 <link rel="stylesheet" type="text/css" href="{{ \Helper::assetUrl() }}backend/sweetalert/dist/sweetalert.css">
- 
-<script>
-                    var bs_path    = '/wcms/';
-                    var bs_root    = 'http://localhost:94/wcms/';
-                    var bs_site    = 'http://localhost:94/wcms/';
-                    var bs_cms     = 'http://localhost:94/wcms/admin-cp/';
-                    var cms_cookie = 'webarqcms_wcms';
-        </script>
+<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="{{ \Helper::assetUrl() }}backend/elfinder/css/elfinder.min.css">
+<link rel="stylesheet" type="text/css" href="{{ \Helper::assetUrl() }}backend/elfinder/css/theme.css">
+<link rel="stylesheet" href="{{ \Helper::assetUrl() }}backend/jstree/dist/themes/default/style.min.css" />
+
 <script type="text/javascript" src="{{ \Helper::assetUrl() }}backend/js/1.8.0.js"></script>
 <script type="text/javascript" src="{{ \Helper::assetUrl() }}backend/js/jquery.alert.js"></script>
 <script type="text/javascript" src="{{ \Helper::assetUrl() }}backend/js/jquery.cookie.js"></script>
@@ -33,6 +30,22 @@
 <script type="text/javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="{{ \Helper::assetUrl() }}backend/tab/style.js"></script>
 <script src="{{ \Helper::assetUrl() }}backend/sweetalert/dist/sweetalert.min.js"></script>
+<script src="{{ \Helper::assetUrl() }}backend/jstree/dist/jstree.min.js"></script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+<!-- elFinder CSS (REQUIRED) -->
+
+<!-- elFinder JS (REQUIRED) -->
+<script src="{{ \Helper::assetUrl() }}backend/elfinder/js/elfinder.min.js"></script>
+
+<!-- elFinder translation (OPTIONAL) -->
+<script src="{{ \Helper::assetUrl() }}backend/elfinder/js/i18n/elfinder.ru.js"></script>
+
+<!-- elFinder initialization (REQUIRED) -->
+
+@include('backend.elfinder')
+
 
 <script>
 
@@ -196,7 +209,7 @@
             <div id="app_header_shadowing"></div>
                 @yield('content')
             <div id="app_footer">
-                <div class="logo">Copyright &COPY; 2015  WEBARQ </div>
+                <div class="logo">Copyright &COPY; 2015 WEBARQ </div>
                 <div class="clear"></div>
             </div>
         </div>

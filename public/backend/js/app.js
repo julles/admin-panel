@@ -3,7 +3,12 @@ $(document).ready(function(){
 	$("#submit_wrapper").click(function(){
 		$(".main-editor").submit();
 	});
-	
+
+	// $('#elfinder').elfinder({
+	// 	url : '/admin-cp/image-library/install'  // connector URL (REQUIRED)
+					
+	// 	// , lang: 'ru'                    // language (OPTIONAL)
+	// });
 });
 
 function showChild(id)

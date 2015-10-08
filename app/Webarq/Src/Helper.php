@@ -181,6 +181,7 @@ class Helper
 		}
 	}
 
+
 	public function cekRightButtons($action)
 	{
 		$menu = $this->getMenu();
@@ -206,6 +207,27 @@ class Helper
             }
         }
 	}
+
+	public function elfinderUpload()
+	{
+		if($this->cekRightButtons('upload') != 'false')
+		{
+			echo "true";
+		}else{
+			echo "false";
+		}
+	}
+
+	public function elfinderDelete()
+	{
+		if($this->cekRightButtons('delete') != 'false')
+		{
+			echo "true";
+		}else{
+			echo "false";
+		}
+	}
+
 
 	public function buttons($update = "" , $delete = "" , $view = "" , $publish = [])
 	{ 
