@@ -152,7 +152,24 @@
 
                     @if($countChild > 0)
                     
-                    <ul class="child_menu" id = 'child{{ $parent->id }}' style = '{{ \Helper::getMenu()->parent_id == $parent->id ? "display:block;" : "" }}'>
+                    @if(!empty(\Helper::getMenu()->parent_id))
+
+                        @if(\Helper::getMenu()->parent_id  == $parent->id)    
+                            @yield($display = 'display:block')
+
+                        @else 
+
+                            @yield($display = '')
+
+                        @endif
+
+                    @else
+
+                    @yield($display = '')
+
+                    @endif
+
+                    <ul class="child_menu" id = 'child{{ $parent->id }}' style = '{{ $display }}'>
                        
 
                         <li class = "childLi">
@@ -179,7 +196,7 @@
             <div id="app_header_shadowing"></div>
                 @yield('content')
             <div id="app_footer">
-                <div class="logo">Copyright &COPY; 2015 {{ \Helper::cekRight() }} WEBARQ </div>
+                <div class="logo">Copyright &COPY; 2015  WEBARQ </div>
                 <div class="clear"></div>
             </div>
         </div>

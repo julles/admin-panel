@@ -19,9 +19,7 @@
         </div>
         
         <div id="content_body">
-            <div id="create-button">
-                <a href="{{ \Helper::urlAction('create') }}"><span>Create Navigation</span></a>
-            </div>
+            {!! \Helper::buttonCreate() !!}
             <div class="clear break20"></div>
             <table id="user-table" class="display" cellspacing="0" width="100%">
                 <thead>

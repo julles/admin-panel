@@ -171,6 +171,16 @@ class Helper
         }
 	}
 
+	public function buttonCreate()
+	{
+		if($this->cekRightButtons('create') != 'false')
+		{
+			return '<div id="create-button">
+	            	<a href="'.$this->urlAction("create").'"><span>Create Navigation</span></a>
+	        	</div>';
+		}
+	}
+
 	public function cekRightButtons($action)
 	{
 		$menu = $this->getMenu();
