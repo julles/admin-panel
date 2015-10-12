@@ -133,7 +133,7 @@ class MenuController extends Controller
     		
     	// 
     	
-    	return redirect(Helper::urlAction('index' , 'no'))->withMessage('Data has been saved');
+    	return redirect(Helper::urlAction('index' , 'no'))->withMessage('Data has been updated');
 
     }
 

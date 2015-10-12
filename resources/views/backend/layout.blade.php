@@ -25,15 +25,15 @@
 <script type="text/javascript" src="{{ \Helper::assetUrl() }}backend/js/jquery.cookie.js"></script>
 <script type="text/javascript" src="{{ \Helper::assetUrl() }}backend/js/function.js"></script>
 <script type="text/javascript" src="{{ \Helper::assetUrl() }}backend/js/cms-scripting.js"></script>
-<script type="text/javascript" src="{{ \Helper::assetUrl() }}backend/js/app.js"></script>
+
 <script type="text/javascript" src="{{ \Helper::assetUrl() }}backend/js/table.js"></script>
 <script type="text/javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="{{ \Helper::assetUrl() }}backend/tab/style.js"></script>
 <script src="{{ \Helper::assetUrl() }}backend/sweetalert/dist/sweetalert.min.js"></script>
 <script src="{{ \Helper::assetUrl() }}backend/jstree/dist/jstree.min.js"></script>
-
+<script src="{{ \Helper::assetUrl() }}backend/ckeditor/ckeditor.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-
+<script type="text/javascript" src="{{ \Helper::assetUrl() }}backend/js/app.js"></script>
 <!-- elFinder CSS (REQUIRED) -->
 
 <!-- elFinder JS (REQUIRED) -->
@@ -113,7 +113,7 @@
             <div class="wg_base_module_navigation" id="main">
                 <ul id="list_container">
                     <li class="root">
-                        <a class="dashboard" href="#"><span>Dashboard</span></a>
+                        <a class="dashboard" href="#" id = 'active'><span>Dashboard</span></a>
                     </li>
                     <?php
                         $menu = \Helper::injectModel('Menu');
@@ -128,14 +128,31 @@
                             if($countChild > 0)
                             {
                                 $url = '#';
+
                             }else{
                                 $url = \Helper::urlBackend($parent->permalink);
                             }
                         ?>
 
-                        <li class="root">
+
+                        @if(!empty(\Helper::getMenu()->parent_id))
+                            @if(\Helper::getMenu()->parent_id  == $parent->id)    
+                                @yield($class = 'root hover')
+
+                            @else 
+
+                                @yield($class = 'root')
+
+                            @endif
+                        @else
+
+                            @yield($class = 'root')
+
+                        @endif
+
+                        <li class="{{ $class }}">
                         
-                        <a class="developer" onclick = "return showChild({{ $parent->id }})" id = 'parent{{ $parent->id }}' href="{{ $url }}">
+                        <a class="developer" onclick = "return showChild({{ $parent->id }})" id = 'parent{{ $parent->id }}' id = 'active' href="{{ $url }}">
                                 <span>{{ $parent->title }}</span>
                         </a>
                         
@@ -205,7 +222,7 @@
                 <div id="snbp">&lt;</div>
                 <div id="snbn">&gt;</div>
             </div>
-            <div style="height: 21px;background-color:#fff;width:100%">&nbsp;</div>
+            <div style="height: 30px;background-color:#fff;width:100%">&nbsp;</div>
             <div id="app_header_shadowing"></div>
                 @yield('content')
             <div id="app_footer">

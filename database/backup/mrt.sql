@@ -10,10 +10,28 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2015-10-08 11:51:41
+Date: 2015-10-12 14:57:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+-- ----------------------------
+-- Table structure for `about`
+-- ----------------------------
+DROP TABLE IF EXISTS `about`;
+CREATE TABLE `about` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(225) COLLATE utf8_unicode_ci NOT NULL,
+  `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of about
+-- ----------------------------
+INSERT INTO about VALUES ('1', 'testing', '<p><img alt=\"\" src=\"/backend/elfinder/php/../../../contents/images/tes/1002156_4378331915527_1135570609_n.jpg\" style=\"height:221px; width:323px\" /></p>\r\n\r\n<p>testing wase</p>\r\n', '0000-00-00 00:00:00', '2015-10-12 07:53:33');
+
 -- ----------------------------
 -- Table structure for `actions`
 -- ----------------------------
@@ -26,7 +44,7 @@ CREATE TABLE `actions` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `actions_action_index` (`action`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of actions
@@ -36,6 +54,28 @@ INSERT INTO actions VALUES ('3', 'update', 'Update', '2015-10-06 10:38:07', '201
 INSERT INTO actions VALUES ('4', 'delete', 'Delete', '2015-10-06 10:38:17', '2015-10-06 10:38:17');
 INSERT INTO actions VALUES ('5', 'view', 'View', '2015-10-07 06:25:46', '2015-10-07 06:25:46');
 INSERT INTO actions VALUES ('6', 'publish', 'Publish UnPublish', '2015-10-07 06:29:37', '2015-10-07 06:29:37');
+INSERT INTO actions VALUES ('7', 'upload', 'Upload', '2015-10-08 12:09:20', '2015-10-08 12:09:20');
+
+-- ----------------------------
+-- Table structure for `media_library_configuration`
+-- ----------------------------
+DROP TABLE IF EXISTS `media_library_configuration`;
+CREATE TABLE `media_library_configuration` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `image_thumbnail_width` int(11) NOT NULL,
+  `image_thumbnail_height` int(11) NOT NULL,
+  `allowed_image_extension` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `allowed_video_extension` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `allowed_document_extension` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of media_library_configuration
+-- ----------------------------
+INSERT INTO media_library_configuration VALUES ('1', '100', '200', 'jpg;png;gif', '', '', '0000-00-00 00:00:00', '2015-10-09 12:30:32');
 
 -- ----------------------------
 -- Table structure for `menus`
@@ -53,7 +93,7 @@ CREATE TABLE `menus` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `menus_parent_id_title_controller_permalink_order_index` (`parent_id`,`title`,`controller`,`permalink`,`order`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of menus
@@ -64,6 +104,13 @@ INSERT INTO menus VALUES ('19', '1', 'Action', 'Backend\\ActionController', 'act
 INSERT INTO menus VALUES ('20', '0', 'User', '#', '#', '1', '', '2015-10-07 04:57:34', '2015-10-07 04:57:34');
 INSERT INTO menus VALUES ('21', '20', 'Role Administration', 'Backend\\RoleController', 'role', '1', 'icon', '2015-10-07 04:58:07', '2015-10-07 07:16:17');
 INSERT INTO menus VALUES ('22', '20', 'User Administration', 'Backend\\UserController', 'user', '2', 'user', '2015-10-07 07:17:13', '2015-10-07 07:17:13');
+INSERT INTO menus VALUES ('23', '0', 'Media Library', '#', '#', '1', 'media', '2015-10-08 10:23:38', '2015-10-08 10:23:38');
+INSERT INTO menus VALUES ('24', '23', 'Image Library', 'Backend\\ImageLibraryController', 'image-library', '1', '', '2015-10-08 10:24:18', '2015-10-08 10:24:18');
+INSERT INTO menus VALUES ('25', '23', 'Video Library', 'Backend\\VideoLibraryController', 'video-library', '2', '', '2015-10-09 11:46:26', '2015-10-09 11:46:26');
+INSERT INTO menus VALUES ('26', '23', 'Document Library', 'Backend\\DocumentLibraryControlelr', 'document-library', '3', '', '2015-10-09 12:04:19', '2015-10-09 12:04:19');
+INSERT INTO menus VALUES ('27', '23', 'Media Library Configuration', 'Backend\\MediaLibraryConfigurationController', 'media-library-configuration', '4', '', '2015-10-09 12:18:16', '2015-10-09 12:18:35');
+INSERT INTO menus VALUES ('28', '0', 'About Us', '#', '#', '1', '', '2015-10-12 05:14:11', '2015-10-12 05:14:11');
+INSERT INTO menus VALUES ('29', '28', 'About MRT', 'Backend\\AboutController', 'about-mrt', '1', '', '2015-10-12 05:14:40', '2015-10-12 05:14:40');
 
 -- ----------------------------
 -- Table structure for `menu_actions`
@@ -80,7 +127,7 @@ CREATE TABLE `menu_actions` (
   KEY `menu_actions_action_id_foreign` (`action_id`),
   CONSTRAINT `menu_actions_action_id_foreign` FOREIGN KEY (`action_id`) REFERENCES `actions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `menu_actions_menu_id_foreign` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of menu_actions
@@ -95,6 +142,17 @@ INSERT INTO menu_actions VALUES ('15', '22', '1', '2015-10-07 08:10:15', '2015-1
 INSERT INTO menu_actions VALUES ('16', '22', '3', '2015-10-07 08:10:18', '2015-10-07 08:10:18');
 INSERT INTO menu_actions VALUES ('17', '22', '4', '2015-10-07 08:10:19', '2015-10-07 08:10:19');
 INSERT INTO menu_actions VALUES ('18', '21', '5', '2015-10-07 09:53:49', '2015-10-07 09:53:49');
+INSERT INTO menu_actions VALUES ('19', '2', '1', '2015-10-08 08:12:54', '2015-10-08 08:12:54');
+INSERT INTO menu_actions VALUES ('20', '2', '3', '2015-10-08 08:12:55', '2015-10-08 08:12:55');
+INSERT INTO menu_actions VALUES ('21', '2', '4', '2015-10-08 08:12:55', '2015-10-08 08:12:55');
+INSERT INTO menu_actions VALUES ('22', '2', '5', '2015-10-08 08:12:56', '2015-10-08 08:12:56');
+INSERT INTO menu_actions VALUES ('23', '2', '6', '2015-10-08 08:12:57', '2015-10-08 08:12:57');
+INSERT INTO menu_actions VALUES ('24', '24', '7', '2015-10-08 12:09:36', '2015-10-08 12:09:36');
+INSERT INTO menu_actions VALUES ('26', '24', '4', '2015-10-08 12:10:41', '2015-10-08 12:10:41');
+INSERT INTO menu_actions VALUES ('27', '25', '7', '2015-10-09 11:54:26', '2015-10-09 11:54:26');
+INSERT INTO menu_actions VALUES ('28', '25', '4', '2015-10-09 11:54:30', '2015-10-09 11:54:30');
+INSERT INTO menu_actions VALUES ('29', '26', '7', '2015-10-09 12:04:37', '2015-10-09 12:04:37');
+INSERT INTO menu_actions VALUES ('30', '26', '4', '2015-10-09 12:04:40', '2015-10-09 12:04:40');
 
 -- ----------------------------
 -- Table structure for `migrations`
@@ -116,6 +174,8 @@ INSERT INTO migrations VALUES ('2015_10_07_040654_create_menu_actions_table', '3
 INSERT INTO migrations VALUES ('2015_10_07_051040_create_roles_table', '4');
 INSERT INTO migrations VALUES ('2015_10_07_072350_update_users_table', '5');
 INSERT INTO migrations VALUES ('2015_10_07_090519_create_rights_table', '6');
+INSERT INTO migrations VALUES ('2015_10_09_121320_create_media_library_configuration', '7');
+INSERT INTO migrations VALUES ('2015_10_11_055244_create_about_table', '8');
 
 -- ----------------------------
 -- Table structure for `password_resets`
@@ -151,14 +211,11 @@ CREATE TABLE `rights` (
   CONSTRAINT `rights_action_id_foreign` FOREIGN KEY (`action_id`) REFERENCES `actions` (`id`) ON DELETE CASCADE,
   CONSTRAINT `rights_menu_id_foreign` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`) ON DELETE CASCADE,
   CONSTRAINT `rights_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of rights
 -- ----------------------------
-INSERT INTO rights VALUES ('45', '1', '19', '4', '2015-10-07 11:17:15', '2015-10-07 11:17:15');
-INSERT INTO rights VALUES ('46', '1', '19', '1', '2015-10-07 11:17:15', '2015-10-07 11:17:15');
-INSERT INTO rights VALUES ('47', '1', '19', '3', '2015-10-07 11:17:15', '2015-10-07 11:17:15');
 INSERT INTO rights VALUES ('48', '1', '21', '1', '2015-10-07 11:17:19', '2015-10-07 11:17:19');
 INSERT INTO rights VALUES ('51', '1', '21', '5', '2015-10-07 11:17:19', '2015-10-07 11:17:19');
 INSERT INTO rights VALUES ('52', '1', '22', '1', '2015-10-07 11:17:19', '2015-10-07 11:17:19');
@@ -166,6 +223,20 @@ INSERT INTO rights VALUES ('53', '1', '22', '3', '2015-10-07 11:17:19', '2015-10
 INSERT INTO rights VALUES ('54', '1', '22', '4', '2015-10-07 11:17:19', '2015-10-07 11:17:19');
 INSERT INTO rights VALUES ('57', '1', '21', '4', '2015-10-07 12:22:47', '2015-10-07 12:22:47');
 INSERT INTO rights VALUES ('58', '1', '21', '3', '2015-10-07 12:23:28', '2015-10-07 12:23:28');
+INSERT INTO rights VALUES ('59', '1', '19', '4', '2015-10-08 08:13:37', '2015-10-08 08:13:37');
+INSERT INTO rights VALUES ('60', '1', '19', '1', '2015-10-08 08:13:38', '2015-10-08 08:13:38');
+INSERT INTO rights VALUES ('61', '1', '19', '3', '2015-10-08 08:13:38', '2015-10-08 08:13:38');
+INSERT INTO rights VALUES ('62', '1', '2', '1', '2015-10-08 08:13:38', '2015-10-08 08:13:38');
+INSERT INTO rights VALUES ('63', '1', '2', '3', '2015-10-08 08:13:38', '2015-10-08 08:13:38');
+INSERT INTO rights VALUES ('64', '1', '2', '4', '2015-10-08 08:13:38', '2015-10-08 08:13:38');
+INSERT INTO rights VALUES ('65', '1', '2', '5', '2015-10-08 08:13:38', '2015-10-08 08:13:38');
+INSERT INTO rights VALUES ('66', '1', '2', '6', '2015-10-08 08:13:38', '2015-10-08 08:13:38');
+INSERT INTO rights VALUES ('71', '1', '24', '4', '2015-10-08 12:29:25', '2015-10-08 12:29:25');
+INSERT INTO rights VALUES ('72', '1', '24', '7', '2015-10-09 03:59:21', '2015-10-09 03:59:21');
+INSERT INTO rights VALUES ('73', '1', '25', '7', '2015-10-09 11:54:44', '2015-10-09 11:54:44');
+INSERT INTO rights VALUES ('74', '1', '25', '4', '2015-10-09 11:54:45', '2015-10-09 11:54:45');
+INSERT INTO rights VALUES ('75', '1', '26', '7', '2015-10-09 12:04:53', '2015-10-09 12:04:53');
+INSERT INTO rights VALUES ('76', '1', '26', '4', '2015-10-09 12:04:53', '2015-10-09 12:04:53');
 
 -- ----------------------------
 -- Table structure for `roles`
@@ -212,5 +283,5 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO users VALUES ('3', 'superadmin', 'webarq@webarq.com', '$2y$10$i2X5wMrFOnEtkTKxdBQbZudlnAGpaDK6.yrs/HoBPvlOx5FcUJbfm', 'HgdojEIzUax2a9c2ht9B4cIWQknpzVc0vPabsDgR8ISalU5zhYhLrBU2pTc8', '2015-10-07 08:34:57', '2015-10-08 03:52:12', '1', 'Web', 'Architect', 'p', 'tes', '085779278894');
+INSERT INTO users VALUES ('3', 'superadmin', 'webarq@webarq.com', '$2y$10$i2X5wMrFOnEtkTKxdBQbZudlnAGpaDK6.yrs/HoBPvlOx5FcUJbfm', 'zVs1cazV1DSFWyWniHbmIdTt0Ia04r17yQlXFZQ7nWQE6SpEnR1q5TgnRHvJ', '2015-10-07 08:34:57', '2015-10-08 10:22:10', '1', 'Web', 'Architect', 'p', 'tes', '085779278894');
 INSERT INTO users VALUES ('4', 'admin', 'reza.wikrama2@gmail.com', '$2y$10$WaTLwQIzT4IsSu2Gvl2VnuClxDt/wWfCrAnBiAN9JGhMANaTsOgg.', null, '2015-10-07 12:24:15', '2015-10-08 04:44:03', '5', 'admin', 'webarq', 'w', 'tes', '0123456789');
