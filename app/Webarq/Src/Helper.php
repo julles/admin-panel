@@ -15,6 +15,11 @@ class Helper
 		return 'admin-cp';
 	}
 
+	public function backendTitle()
+	{
+		return 'Webarq-Laramin';
+	}
+
 	public function segment($segment)
 	{
 		return Request::segment($segment);

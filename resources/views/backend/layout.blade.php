@@ -80,7 +80,7 @@
 
 </script> 
 
-<title>History</title>
+<title>{{ \Helper::backendTitle() }}</title>
 </head>
 <body>
 <div id="wrapper">
