@@ -4,9 +4,83 @@ $(document).ready(function(){
 		$(".main-editor").submit();
 	});
 
+	$("#span_en").click(function(){
+		$(".main-editor").submit();
+	});
+
+
+
+	$("#content_english").hide();
+
+	$("#content_banner").hide();
+
+	$( "#datepicker" ).datepicker({
+	  	  	changeYear: true,
+	  	  	changeMonth: true,
+	  	  	dateFormat: "dd-mm-yy"
+
+  	  });
+	$( "#datepicker2" ).datepicker({
+	  	  	changeYear: true,
+	  	  	changeMonth: true,
+	  	  	dateFormat: "dd-mm-yy"
+
+  	  });
+
+	
+	$("#status_gallery").change(function(){
+
+		if($(this).val() == 'v')
+		{
+			
+			$("#content_video").show();
+			$("#content_picture").hide();
+
+		}else{
+
+			$("#content_video").hide();
+			$("#content_picture").show();
+
+		}
+
+	});
 
 	
 });
+
+function activeBahasa()
+{
+	$("#tab_bahasa").addClass('active');
+	$("#tab_english").removeClass('active');
+	$("#tab_banner").removeClass('active');
+
+	$("#content_bahasa").show();
+	$("#content_english").hide();
+	$("#content_banner").hide();
+}
+
+function activeEnglish()
+{
+	$("#tab_bahasa").removeClass('active');
+	$("#tab_english").addClass('active');
+	$("#tab_banner").removeClass('active');
+
+	$("#content_bahasa").hide();
+	$("#content_english").show();
+	$("#content_banner").hide();
+}
+
+function activeBanner()
+{
+	$("#tab_bahasa").removeClass('active');
+	$("#tab_english").removeClass('active');
+	$("#tab_banner").addClass('active');
+
+	$("#content_bahasa").hide();
+	$("#content_english").hide();
+	$("#content_banner").show();
+}
+
 
 function showChild(id)
 {
@@ -99,3 +173,4 @@ function insertRightEach(role_id , parent_id , check)
 
 		});
 }
+

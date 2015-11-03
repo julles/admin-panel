@@ -41,6 +41,23 @@
                                 </div>
                                 <div class="line-break clear_left">&nbsp;</div>
                             </div>
+
+                                <div class="element-block-wrapper">
+                                    <div class="label block_left">Banner</div>
+                                    <div class="center block_separator">:</div>
+                                    <div class=" block_label block_right">
+                                        <div><a class="Wbutton" onclick = "return browseElfinder('banner'  , 'image' , 'elfinder_browse1')" >Browse</a></div>
+                                        <div id="image" style = 'margin-top:30px;'>
+                                            
+                                            @if(!empty($banner->banner))
+                                                <img src="{{ \Helper::assetUrl().\Helper::contents().'/'.$banner->banner }}" width="200" height="200" />
+                                            @endif
+
+                                        </div>
+                                        <input type = 'hidden' name = 'banner' id = 'banner' />
+                                    </div>
+                                    <div class="line-break clear_left">&nbsp;</div>
+                                </div>
                             
                             <div class="center no_label">&nbsp;</div>
                         
@@ -59,6 +76,7 @@
                 <!-- end of form --></div>
         </div>
     </div>
+    @include('backend.popElfinder');
 @endsection
 @stop
 
