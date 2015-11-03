@@ -113,7 +113,7 @@
             <div class="wg_base_module_navigation" id="main">
                 <ul id="list_container">
                     <li class="root">
-                        <a class="dashboard" href="#" id = 'active'><span>Dashboard</span></a>
+                        <a class="dashboard" href="{{ url(\Helper::backendName()) }}" id = 'active'><span>Dashboard</span></a>
                     </li>
                     <?php
                         $menu = \Helper::injectModel('Menu');
@@ -202,14 +202,22 @@
                     <ul class="child_menu" id = 'child{{ $parent->id }}' style = '{{ $display }}'>
                        
 
+
                         <li class = "childLi">
                         @foreach($menu->whereParentId($parent->id)->orderBy('order' , 'asc')->get() as $child)
-                       
-                            <a class="a_child_menu" href="{{ \Helper::urlBackend($child->permalink) }}">
+                            
+                            @if(!empty(\Helper::getMenu()->id))
+                                @yield($color = \Helper::getMenu()->id == $child->id ? '#14c005' : '#666')
+                            @else
+                                @yield($color = '#666')
+                            @endif
+                            
+                            <a style="color:{{ $color }}" class="a_child_menu" href="{{ \Helper::urlBackend($child->permalink) }}">
                                 {{ $child->title }}
                             </a>  &nbsp; &nbsp;
                        
                         @endforeach
+                       
                         </li>
                         
                         <li style="clear:left;">&nbsp;</li>
