@@ -42,4 +42,15 @@ $(document).ready(function(){
         ]
     });
 
+     $('#history-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: urlAction("data"),
+        columns: [
+            { data: 'created_at', name: 'created_at' },
+            { data: 'values', name: 'values'},
+            
+        ]
+    });
+
 });

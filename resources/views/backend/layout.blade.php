@@ -43,7 +43,49 @@
 <script src="{{ \Helper::assetUrl() }}backend/elfinder/js/i18n/elfinder.ru.js"></script>
 
 <!-- elFinder initialization (REQUIRED) -->
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script type="text/javascript">
+    
+    $(function () {
+    $('#chart').highcharts({
+        title: {
+            text: 'Dashboard Activity',
+            x: -20 //center
+        },
+        subtitle: {
+            //text: 'Source: WorldClimate.com',
+            //x: -20
+        },
+        xAxis: {
+            categories: {!! \Helper::showDays() !!}
+        },
+        yAxis: {
+            title: {
+           //     text: 'Temperature (°C)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            //valueSuffix: '°C'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: 'Activities',
+            data: {!! \Helper::countActivities()  !!}
+        }]
+    });
+});
 
+</script>
 @include('backend.elfinder')
 
 
@@ -88,7 +130,13 @@
         <div id="icon">WEBARQ Content Management System 2.1.0</div>
         <div id="welcome-message">
             <div class="fl" id="message">
-                Welcome <span class="username"><a href="http://localhost:94/wcms/admin-cp/user/profile">Superadmin</a></span>
+                Welcome <span class="username">
+                            <a href="{{ \Helper::urlBackend('profile') }}">
+
+                                {{ \Auth::user()->firstname }}
+
+                        </a>
+                    </span>
             </div>
             <div class="fl" id="logout">
                 <a href="{{ url('logout') }}"></a>

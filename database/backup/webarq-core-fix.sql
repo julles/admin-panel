@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2015-11-26 15:45:01
+Date: 2015-11-26 15:56:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -119,7 +119,7 @@ CREATE TABLE `menus` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `menus_parent_id_title_controller_permalink_order_index` (`parent_id`,`title`,`controller`,`permalink`,`order`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of menus
@@ -138,6 +138,7 @@ INSERT INTO menus VALUES ('27', '23', 'Media Library Configuration', 'Backend\\M
 INSERT INTO menus VALUES ('28', '0', 'About Us', '#', '#', '1', '', '2015-10-12 05:14:11', '2015-10-12 05:14:11');
 INSERT INTO menus VALUES ('29', '28', 'About MRT', 'Backend\\AboutController', 'about-mrt', '1', '', '2015-10-12 05:14:40', '2015-10-12 05:14:40');
 INSERT INTO menus VALUES ('30', '20', 'Profile', 'Backend\\ProfileController', 'profile', '3', '', '2015-11-26 08:41:26', '2015-11-26 08:41:26');
+INSERT INTO menus VALUES ('31', '20', 'History', 'Backend\\HistoryController', 'history', '4', '', '2015-11-26 08:46:43', '2015-11-26 08:46:43');
 
 -- ----------------------------
 -- Table structure for `menu_actions`
