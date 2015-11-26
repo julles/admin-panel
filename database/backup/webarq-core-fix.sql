@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2015-11-26 15:56:01
+Date: 2015-11-26 16:44:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -72,7 +72,7 @@ CREATE TABLE `histories` (
   KEY `histories_action_index` (`action`),
   KEY `histories_user_id_foreign` (`user_id`),
   CONSTRAINT `histories_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of histories
@@ -81,6 +81,12 @@ INSERT INTO histories VALUES ('1', '3', 'Login', '0', 'superadmin : Login  () ',
 INSERT INTO histories VALUES ('2', '3', 'Update', '29', 'superadmin : Update About MRT (_token = QmhL829hQmZrWwaUuTw2KqXswxndOnIhalW0nmPC , title = testing , description = <p><img alt=\"\" src=\"/backend/elfinder/php/../../../contents/images/tes/1002156_4378331915527_1135570609_n.jpg\" style=\"height:221px; width:323px\" /></p>\r\n\r\n<p>testing wase</p>\r\n ,) ', '2015-11-26 08:36:34', '2015-11-26 08:36:34');
 INSERT INTO histories VALUES ('3', '3', 'Published', '22', 'superadmin : Published User Administration (id = 4 ,) ', '2015-11-26 08:40:34', '2015-11-26 08:40:34');
 INSERT INTO histories VALUES ('4', '3', 'Update His Profile', '30', 'superadmin : Update His Profile Profile (role_id = 1 , email = webarq@webarq.com , name = superadmin , password = $2y$10$zN.bB1SU1R4t8Guu3FB43.bBrOTgYlz7Ax3j1RILbF/TxcgVaADDG , firstname = Web , lastname = Architect , gender = p , address = tes , phone = 085779278894 ,) ', '2015-11-26 08:44:50', '2015-11-26 08:44:50');
+INSERT INTO histories VALUES ('5', '3', 'Login', '0', 'superadmin : Login  () ', '2015-11-26 09:31:13', '2015-11-26 09:31:13');
+INSERT INTO histories VALUES ('6', '5', 'Login', '0', 'reza : Login  () ', '2015-11-26 09:31:53', '2015-11-26 09:31:53');
+INSERT INTO histories VALUES ('7', '5', 'Login', '0', 'reza : Login  () ', '2015-11-26 09:43:38', '2015-11-26 09:43:38');
+INSERT INTO histories VALUES ('8', '5', 'Login', '0', 'reza : Login  () ', '2015-11-26 09:44:09', '2015-11-26 09:44:09');
+INSERT INTO histories VALUES ('9', '5', 'Update His Profile', '30', 'reza : Update His Profile Profile (role_id = 1 , email = reza.wikrama3@gmail.com , name = reza , password = $2y$10$vRWHDaPcgZI9AOkIp5fknufAVvnXVCTXPepq76h8WctFY1gUzrwGS , firstname = Muhamad Reza , lastname = Abdul Rohim , gender = p , address =  , phone =  ,) ', '2015-11-26 09:44:25', '2015-11-26 09:44:25');
+INSERT INTO histories VALUES ('10', '5', 'Login', '0', 'reza : Login  () ', '2015-11-26 09:44:34', '2015-11-26 09:44:34');
 
 -- ----------------------------
 -- Table structure for `media_library_configuration`
@@ -310,10 +316,11 @@ CREATE TABLE `users` (
   UNIQUE KEY `users_email_unique` (`email`),
   KEY `users_role_id_foreign` (`role_id`),
   CONSTRAINT `users_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO users VALUES ('3', 'superadmin', 'webarq@webarq.com', '$2y$10$zN.bB1SU1R4t8Guu3FB43.bBrOTgYlz7Ax3j1RILbF/TxcgVaADDG', '3y60ZM298yNIrKduSSVN4OrTOMlnQxAdhSkmwzrOWI7PayAdYpGmCHYwZ4oz', '2015-10-07 08:34:57', '2015-11-26 08:44:49', '1', 'Web', 'Architect', 'p', 'tes', '085779278894', 'y');
+INSERT INTO users VALUES ('3', 'superadmin', 'webarq@webarq.com', '$2y$10$zN.bB1SU1R4t8Guu3FB43.bBrOTgYlz7Ax3j1RILbF/TxcgVaADDG', 'PJSFqcMKfaovanBXnEXsbp3Sl8EYJHWUOxTdKXiBgYUMbeLtS9qF2zHRThKu', '2015-10-07 08:34:57', '2015-11-26 09:31:49', '1', 'Web', 'Architect', 'p', 'tes', '085779278894', 'y');
 INSERT INTO users VALUES ('4', 'admin', 'reza.wikrama2@gmail.com', '$2y$10$WaTLwQIzT4IsSu2Gvl2VnuClxDt/wWfCrAnBiAN9JGhMANaTsOgg.', null, '2015-10-07 12:24:15', '2015-11-26 08:40:34', '5', 'admin', 'webarq', 'w', 'tes', '0123456789', 'y');
+INSERT INTO users VALUES ('5', 'reza', 'reza.wikrama3@gmail.com', '$2y$10$vRWHDaPcgZI9AOkIp5fknufAVvnXVCTXPepq76h8WctFY1gUzrwGS', 'qiyCttqvAEVZAogo4FXrMhRkm2lAgceW6rqKmH3poAvhJSTbYM5LDbNA9H7t', '2015-11-26 09:31:46', '2015-11-26 09:44:30', '1', 'Muhamad Reza', 'Abdul Rohim', 'p', '', '', 'n');

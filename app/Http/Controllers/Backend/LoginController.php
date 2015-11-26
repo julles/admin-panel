@@ -24,30 +24,7 @@ class LoginController extends Controller
             return redirect()->back()->withMessage('Please check your username or password');
         }
     }
-
-    public function template($password)
-    {
-      return  $html = '<html>
-                    <head>
-                            <title>HTML email</title>
-                    </head>
-                        <body>
-                            <table widht="600px" style="background: #f3f3f3; padding: 20px;" cellpadding="1px" cellspacing="1px">
-                                <tr>
-                                    <td colspan="2" style = "font-size:16px;padding-bottom:10px;padding-top:10px;"><b>New Password MRT User</b></td>
-                                </tr>
-                                <tr>
-                                    <td width="250px">Your new password</td>
-                                    <td>:</td>
-                                    <td>'.$password.'</td>
-                                </tr>
-
-                                
-                            </table>
-                            </body>
-                </html>';
-    }
-
+    
     public function getForgot()
     {
         $model = \Helper::injectModel('User');
@@ -58,24 +35,16 @@ class LoginController extends Controller
         {
             $randomPassword = 'webarq'.rand();
             $newPassword = \Hash::make($randomPassword);
-            $model->whereEmail($email)->update(['password' => $newPassword]);
 
-            $to = $email;
-            $subject = 'MRT - Forgot Password';
-            $body = $this->template($randomPassword);
+            \Mail::send('email.forgot', ['email' => $search , 'randomPassword' => $randomPassword], function ($m) use ($search , $email) {
+                $m->from('no-reply@webarq.co.id');
+                $m->to($email)->subject('Forgot Password');
+            });
             
-            // To send HTML mail, the Content-type header must be set
-            $headers = "MIME-Version: 1.0" . "\r\n";
-            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            $update = $model->whereEmail($email)->update(['password' => $newPassword]);
 
-            $send_email = mail($to, $subject, $body, $headers);
-            if($send_email)
-            {
-                echo 'true';
-            }
-           
+            echo 'true';
 
-            
         }else{
             echo 'false';
         
