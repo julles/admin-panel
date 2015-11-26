@@ -30,15 +30,20 @@ class UserController extends Controller
     public function getData()
     {
 
+
+        $id = \Auth::user()->id;
+
     	$model = $this->model->join('roles' , 'users.role_id' , '=' , 'roles.id')
-    	->select('users.id' , 'name' , 'email' ,  'firstname' , 'lastname' , 'roles.role');
+    	->select('users.id' , 'name' , 'email' ,  'firstname' , 'lastname' , 'roles.role' , 'users.status')
+        ->where('users.id' , '!=' , $id);
 
     	return Datatables::of($model)
     	->addColumn('fullname' , function($model){
     		return $model->firstname." ".$model->lastname;
     	})
     	->addColumn('action' , function($model){
-    		return Helper::buttons($model->id , $model->id , $model->id , ['true' , $model->id]);
+            $status = $model->status =='y' ? 'true' : 'false';
+    		return Helper::buttons($model->id , $model->id , $model->id , [$status , $model->id]);
     	})
     	->make(true);
     }
@@ -126,5 +131,35 @@ class UserController extends Controller
     	}catch(\Exception $e){
     		return redirect()->back()->withInfo('Data can not be deleted');
     	}
+    }
+
+
+    public function getPublish($id)
+    {
+        $model = $this->model->find($id);
+        if(!empty($model->id))
+        {
+            if($model->status == 'y')
+            {
+                $updateStatus = 'n';
+                $message = 'Data has been unpublished';
+                $words = 'Un published';
+            }else{
+                $updateStatus = 'y';
+                $message = 'Data has been published';
+                $words = 'Published';
+            }
+
+            Helper::history($words , '' , ['id' => $id]);
+
+            $model->update(['status' => $updateStatus]);
+
+            return redirect()->back()->withMessage($message);
+       
+        }else{
+
+            return redirect()->back()->withMessage('something wrong');
+       
+        }
     }
 }
