@@ -4,13 +4,13 @@ Navicat MySQL Data Transfer
 Source Server         : local
 Source Server Version : 50624
 Source Host           : localhost:3306
-Source Database       : mrt
+Source Database       : webarq-core-fix
 
 Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2015-10-12 14:57:13
+Date: 2015-11-26 15:36:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -55,6 +55,30 @@ INSERT INTO actions VALUES ('4', 'delete', 'Delete', '2015-10-06 10:38:17', '201
 INSERT INTO actions VALUES ('5', 'view', 'View', '2015-10-07 06:25:46', '2015-10-07 06:25:46');
 INSERT INTO actions VALUES ('6', 'publish', 'Publish UnPublish', '2015-10-07 06:29:37', '2015-10-07 06:29:37');
 INSERT INTO actions VALUES ('7', 'upload', 'Upload', '2015-10-08 12:09:20', '2015-10-08 12:09:20');
+
+-- ----------------------------
+-- Table structure for `histories`
+-- ----------------------------
+DROP TABLE IF EXISTS `histories`;
+CREATE TABLE `histories` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `action` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `menu_id` int(11) NOT NULL,
+  `values` text COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `histories_action_index` (`action`),
+  KEY `histories_user_id_foreign` (`user_id`),
+  CONSTRAINT `histories_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of histories
+-- ----------------------------
+INSERT INTO histories VALUES ('1', '3', 'Login', '0', 'superadmin : Login  () ', '2015-11-26 08:36:11', '2015-11-26 08:36:11');
+INSERT INTO histories VALUES ('2', '3', 'Update', '29', 'superadmin : Update About MRT (_token = QmhL829hQmZrWwaUuTw2KqXswxndOnIhalW0nmPC , title = testing , description = <p><img alt=\"\" src=\"/backend/elfinder/php/../../../contents/images/tes/1002156_4378331915527_1135570609_n.jpg\" style=\"height:221px; width:323px\" /></p>\r\n\r\n<p>testing wase</p>\r\n ,) ', '2015-11-26 08:36:34', '2015-11-26 08:36:34');
 
 -- ----------------------------
 -- Table structure for `media_library_configuration`
@@ -176,6 +200,7 @@ INSERT INTO migrations VALUES ('2015_10_07_072350_update_users_table', '5');
 INSERT INTO migrations VALUES ('2015_10_07_090519_create_rights_table', '6');
 INSERT INTO migrations VALUES ('2015_10_09_121320_create_media_library_configuration', '7');
 INSERT INTO migrations VALUES ('2015_10_11_055244_create_about_table', '8');
+INSERT INTO migrations VALUES ('2015_11_26_082425_create_histories_table', '9');
 
 -- ----------------------------
 -- Table structure for `password_resets`
@@ -283,5 +308,5 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO users VALUES ('3', 'superadmin', 'webarq@webarq.com', '$2y$10$i2X5wMrFOnEtkTKxdBQbZudlnAGpaDK6.yrs/HoBPvlOx5FcUJbfm', 'zVs1cazV1DSFWyWniHbmIdTt0Ia04r17yQlXFZQ7nWQE6SpEnR1q5TgnRHvJ', '2015-10-07 08:34:57', '2015-10-08 10:22:10', '1', 'Web', 'Architect', 'p', 'tes', '085779278894');
+INSERT INTO users VALUES ('3', 'superadmin', 'webarq@webarq.com', '$2y$10$i2X5wMrFOnEtkTKxdBQbZudlnAGpaDK6.yrs/HoBPvlOx5FcUJbfm', '3y60ZM298yNIrKduSSVN4OrTOMlnQxAdhSkmwzrOWI7PayAdYpGmCHYwZ4oz', '2015-10-07 08:34:57', '2015-11-26 08:32:26', '1', 'Web', 'Architect', 'p', 'tes', '085779278894');
 INSERT INTO users VALUES ('4', 'admin', 'reza.wikrama2@gmail.com', '$2y$10$WaTLwQIzT4IsSu2Gvl2VnuClxDt/wWfCrAnBiAN9JGhMANaTsOgg.', null, '2015-10-07 12:24:15', '2015-10-08 04:44:03', '5', 'admin', 'webarq', 'w', 'tes', '0123456789');

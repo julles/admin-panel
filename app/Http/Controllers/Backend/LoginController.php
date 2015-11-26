@@ -17,7 +17,7 @@ class LoginController extends Controller
     {
         if(\Auth::attempt(['name' => $request->username , 'password' => $request->password]))
         {
-        
+            \Helper::history('Login' , '' , []);
             return redirect(\Helper::backendName());
         
         }else{

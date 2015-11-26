@@ -7,7 +7,7 @@ class Helper
 	
 	public function applicationName()
 	{
-		return 'MRT - Website';
+		return 'CORE';
 	}
 
 	public function backendName()
@@ -17,7 +17,7 @@ class Helper
 
 	public function backendTitle()
 	{
-		return 'Webarq-Laramin';
+		return 'Webarq-CORE';
 	}
 
 	public function segment($segment)
@@ -298,5 +298,133 @@ class Helper
         	swal("'.$big.'", "'.$small.'", "'.$event.'")
         
     	</script>';
+	}
+
+	public function history($action = "" ,  $menu = "" , $values = [])
+	{
+		@$modelMenu = $this->getMenu();
+
+		$menuTitle = @$modelMenu->title;
+
+		$user = \Auth::user();
+
+		$username = $user->name;
+
+		$userId = $user->id;
+
+		$model = $this->injectModel('History');
+
+		if(!empty($action))
+		{
+			$fixAction = $action;
+
+		}else{
+
+			$fixAction = $this->segmentAction();	
+		}
+
+		if(!empty($menu))
+		{
+			$fixMenu = $menu;
+
+		}else{
+
+			$fixMenu = $menuTitle;	
+		}		
+
+		$fixValues = "";
+
+		foreach($values as $key => $val)
+		{
+			$fixValues .= "$key = $val , ";
+		}
+
+		$fixValues = substr($fixValues , 0 , -1);
+
+		$words = $username.' : '.$fixAction.' '.$fixMenu.' ('.$fixValues.') ';
+
+		$model->create([
+
+			'user_id' => $userId ,
+
+			'menu_id' => (empty(@$modelMenu->id)) ? 0 : @$modelMenu->id,
+
+			'action' => $fixAction,
+
+			'values' => $words,
+
+			'created_at' => date('Y-m-d H:i:s'),
+
+		]);
+		
+	}
+
+	public function clean($str) {
+		$clean = trim($str);
+		$clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $str);
+		$clean = strtolower(trim($clean, '-'));
+		$clean = preg_replace("/[\/_|+ -]+/", '-', $clean);
+
+		return $clean;
+	}
+
+	public function showDays()
+	{
+		$date = date("Y-m-d");
+		
+		$hasil ='';
+
+		for($a=1;$a<=7;$a++)
+		{
+			$hasilDate = date("d F Y" , strtotime("-$a day" , strtotime($date)));
+		
+			$hasil .= "'$hasilDate',";
+		}
+
+		$hasil = substr($hasil , 0 , -1);
+
+		$hasil = "[$hasil]";
+
+		return $hasil;	
+	}
+
+	public function countActivities()
+	{
+		$date = date("Y-m-d");
+		
+		$hasil ='';
+
+		for($a=1;$a<=7;$a++)
+		{
+			$hasilDate = date("Y-m-d" , strtotime("-$a day" , strtotime($date)));
+			$count = $this->injectModel('History')->whereRaw("DATE(created_at) = '$hasilDate'")->count();	
+			$hasil .= "$count,";
+		}
+
+		$hasil = substr($hasil , 0 , -1);
+
+		$hasil = "[$hasil]";
+
+		return $hasil;	
+	}
+
+	public function fgetController()
+	{
+		return $this->segment(1);
+	}
+
+	public function lang()
+	{
+		return $this->segment(2);
+	}
+
+	public function language($en , $id)
+	{
+		if($this->lang() == 'en')
+		{
+			return $en;
+		}else{
+			return $id;
+		}
 	}
 }

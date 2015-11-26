@@ -42,6 +42,8 @@
                                 <div class="line-break clear_left">&nbsp;</div>
                             </div>
 
+                            <?php
+                            /*
                                 <div class="element-block-wrapper">
                                     <div class="label block_left">Banner</div>
                                     <div class="center block_separator">:</div>
@@ -58,7 +60,8 @@
                                     </div>
                                     <div class="line-break clear_left">&nbsp;</div>
                                 </div>
-                            
+                            */
+                           ?>
                             <div class="center no_label">&nbsp;</div>
                         
                         </div>

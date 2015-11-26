@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\About;
-
+use Helper;
 class AboutController extends Controller
 {
 	public $model;
@@ -34,7 +34,7 @@ class AboutController extends Controller
 		}
 
 		$this->model->find(1)->update($inputs);
-
+		Helper::history('Update' , '' , $inputs);
 		return redirect()->back()->withMessage('Data has been updated');
 	}
 }
